@@ -7,7 +7,7 @@ function Configuracion(props, context) {
     <div>
       <h2>Configuracion General</h2>
       <Form horizontal>
-        <FormGroup controlId="formConfiguracion">
+        <FormGroup controlId="">
           <Col componentClass={ControlLabel} sm={3}>
             Tasa Financiamiento
           </Col>
@@ -15,7 +15,7 @@ function Configuracion(props, context) {
             <FormControl type="text" placeholder="" />
           </Col>
         </FormGroup>
-        <FormGroup controlId="formConfiguracion">
+        <FormGroup controlId="">
           <Col componentClass={ControlLabel} sm={3}>
             % Enganche
           </Col>
@@ -23,7 +23,7 @@ function Configuracion(props, context) {
             <FormControl type="text" placeholder="" />
           </Col>
         </FormGroup>
-        <FormGroup controlId="formConfiguracion">
+        <FormGroup controlId="">
           <Col componentClass={ControlLabel} sm={3}>
             Plaza Maximo
           </Col>
@@ -35,7 +35,7 @@ function Configuracion(props, context) {
       <div className={styles.buttonsToolbar}>
         <ButtonToolbar>
           <Button bsStyle="success">Cancelar</Button>
-          <Button bsStyle="success">Guardar</Button>
+          <Button bsStyle="success" type="submit">Guardar</Button>
         </ButtonToolbar>
       </div>
     </div>

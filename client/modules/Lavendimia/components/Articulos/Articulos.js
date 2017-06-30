@@ -10,7 +10,7 @@ function Articulos(props, context) {
           <Button bsStyle="primary" bsSize="large">Nuevo Articulo</Button>
         </ButtonToolbar>
       </div>
-      <Table striped bordered condensed hover>
+      <Table condensed hover>
         <thead>
           <tr>
             <th>Clave Articulo</th>

@@ -9,7 +9,7 @@ function Ventas(props, context) {
           <Button bsStyle="primary" bsSize="large">Nueva Venta</Button>
         </ButtonToolbar>
       </div>
-      <Table striped bordered condensed hover>
+      <Table condensed hover>
         <thead>
           <tr>
             <th>Folio de venta</th>

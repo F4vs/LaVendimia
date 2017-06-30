@@ -56,6 +56,14 @@ export default (
       }}
     />
     <Route
+      path="/ventas/registrosventas"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./modules/Lavendimia/components/Registrosventas/Registrosventas.js').default);
+        });
+      }}
+    />
+    <Route
       path="/configuracion"
       getComponent={(nextState, cb) => {
         require.ensure([], require => {

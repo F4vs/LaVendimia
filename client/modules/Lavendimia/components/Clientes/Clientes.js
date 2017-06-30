@@ -10,7 +10,7 @@ function Clientes(props, context) {
           <Button bsStyle="primary" bsSize="large">Nuevo Cliente</Button>
         </ButtonToolbar>
       </div>
-      <Table striped bordered condensed hover>
+      <Table condensed hover>
         <thead>
           <tr>
             <th>Clave Cliente</th>
