@@ -1,9 +1,29 @@
 import React, { PropTypes } from 'react';
+import { Table, ButtonToolbar, Button } from 'react-bootstrap';
+import styles from './Articulos.css';
 
 function Articulos(props, context) {
   return (
     <div>
-      <h1>ARTICULOS</h1>
+      <div className={styles.primaryButton}>
+        <ButtonToolbar>
+          <Button bsStyle="primary" bsSize="large">Nuevo Articulo</Button>
+        </ButtonToolbar>
+      </div>
+      <Table striped bordered condensed hover>
+        <thead>
+          <tr>
+            <th>Clave Articulo</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>01</td>
+            <td>Comedor de roble para 6 perosonas</td>
+          </tr>
+        </tbody>
+      </Table>
     </div>
   );
 }

@@ -8,6 +8,9 @@ import styles from './Lavendimia.css';
 class Lavendimia extends Component {
   render() {
     return (
+      <div className={styles}>
+        <p>Cargando</p>
+      </div>
     );
   }
 }

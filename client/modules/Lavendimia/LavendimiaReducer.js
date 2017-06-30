@@ -1,5 +1,5 @@
 // Import Actions
-import {  } from './LavendimiaActions';
+import { } from './LavendimiaActions';
 
 // Initial State
 const initialState = {};

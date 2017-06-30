@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import moment from 'moment';
-import { Link } from 'react-router';
-import { FormattedMessage } from 'react-intl';
-import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+// import { Link } from 'react-router';
+// import { FormattedMessage } from 'react-intl';
+import { Navbar, Nav, NavDropdown, MenuItem } from 'react-bootstrap';
 
 // Import Style
 import styles from './Header.css';
@@ -15,7 +15,7 @@ export function Header(props, context) {
   return (
     <Navbar>
       <div className={`pull-right ${styles.fecha}`}>
-        <p>{moment().format('MMMM Do YYYY, h:mm:ss a')}</p>
+        <p>{moment().format('MM-DD-YY')}</p>
       </div>
       <Nav>
         <NavDropdown eventKey={3} title="Inicio" id="basic-nav-dropdown">
