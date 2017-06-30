@@ -4,6 +4,10 @@
   border-bottom: 1px solid #ccc;
 }
 
+.fecha {
+  padding-top: 13px;
+}
+
 .content {
   width: 100%;
   max-width: 980px;

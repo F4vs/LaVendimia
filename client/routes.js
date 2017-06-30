@@ -32,10 +32,34 @@ export default (
       }}
     />
     <Route
-      path="/posts/:slug-:cuid"
+      path="/articulos"
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
-          cb(null, require('./modules/Post/pages/PostDetailPage/PostDetailPage').default);
+          cb(null, require('./modules/Lavendimia/components/Articulos/Articulos.js').default);
+        });
+      }}
+    />
+    <Route
+      path="/clientes"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./modules/Lavendimia/components/Clientes/Clientes.js').default);
+        });
+      }}
+    />
+    <Route
+      path="/ventas"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./modules/Lavendimia/components/Ventas/Ventas.js').default);
+        });
+      }}
+    />
+    <Route
+      path="/configuracion"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./modules/Lavendimia/components/Configuracion/Configuracion.js').default);
         });
       }}
     />
