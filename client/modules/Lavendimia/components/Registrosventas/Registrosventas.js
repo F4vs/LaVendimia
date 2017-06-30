@@ -6,6 +6,9 @@ function Registrosventas(props, context) {
   return (
     <div>
       <h2>Registros de Ventas</h2>
+      <div className={styles.alingfolio}>
+        <p>Folio-</p>
+      </div>
       <ButtonToolbar className={styles.alingbutton}>
         <Button bsStyle="primary" type="submit">Agregar</Button>
       </ButtonToolbar>
