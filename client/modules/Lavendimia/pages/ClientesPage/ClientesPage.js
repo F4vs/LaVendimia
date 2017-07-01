@@ -1,12 +1,12 @@
 import React, { PropTypes, Component } from 'react';
 import { Table, ButtonToolbar, Button } from 'react-bootstrap';
-import styles from './ClientePage.css';
+import styles from './ClientesPage.css';
 import { connect } from 'react-redux';
 import { getClientes } from '../../LavendimiaReducer';
 import { fetchClientes } from '../../LavendimiaActions';
 import { Link } from 'react-router';
 
-class ClientePage extends Component {
+class ClientesPage extends Component {
 
   componentDidMount() {
     this.props.dispatch(fetchClientes());
@@ -55,9 +55,9 @@ function mapStateToProps(state) {
   };
 }
 
-ClientePage.propTypes = {
+ClientesPage.propTypes = {
   clientes: PropTypes.array,
   dispatch: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(ClientePage);
+export default connect(mapStateToProps)(ClientesPage);

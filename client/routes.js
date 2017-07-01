@@ -43,7 +43,7 @@ export default (
       path="/clientes"
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
-          cb(null, require('./modules/Lavendimia/pages/ClientePage/ClientePage.js').default);
+          cb(null, require('./modules/Lavendimia/pages/ClientesPage/ClientesPage.js').default);
         });
       }}
     />
@@ -59,7 +59,7 @@ export default (
       path="/ventas"
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
-          cb(null, require('./modules/Lavendimia/components/Ventas/Ventas.js').default);
+          cb(null, require('./modules/Lavendimia/pages/VentasPage/VentasPage.js').default);
         });
       }}
     />
@@ -67,7 +67,7 @@ export default (
       path="/venta"
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
-          cb(null, require('./modules/Lavendimia/pages/ArticulosPage/ArticulosPage.js').default);
+          cb(null, require('./modules/Lavendimia/pages/VentaPage/VentaPage.js').default);
         });
       }}
     />

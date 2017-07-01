@@ -3,7 +3,7 @@ import * as LavendimiaController from '../controllers/lavendimia.controller';
 
 const router = new Router();
 
-// router.route('/ventas').get(LavendimiaController.getSomething);
+router.route('/ventas').get(LavendimiaController.getVentas);
 // router.route('/ventas/registrosventas').get(LavendimiaController.getSomething);
 router.route('/clientes').get(LavendimiaController.getClientes);
 router.route('/cliente').post(LavendimiaController.addCliente);

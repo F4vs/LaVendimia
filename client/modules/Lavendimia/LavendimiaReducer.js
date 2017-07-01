@@ -1,5 +1,6 @@
 // Import Actions
-import { ADD_CLIENTES, ADD_CLIENTE, ADD_ARTICULOS } from './LavendimiaActions';
+import {
+  ADD_CLIENTES, ADD_ARTICULOS, ADD_VENTAS, ADD_CLIENTE } from './LavendimiaActions';
 
 // Initial State
 const initialState = {
@@ -16,6 +17,10 @@ const LavendimiaReducer = (state = initialState, action) => {
       return {
         data: action.articulos,
       };
+    case ADD_VENTAS :
+      return {
+        data: action.ventas,
+      };
     case ADD_CLIENTE :
       return {
         data: [action.cliente, ...state.data],
@@ -26,7 +31,7 @@ const LavendimiaReducer = (state = initialState, action) => {
 };
 
 export const getClientes = state => state.lavendimia.data;
-
 export const getArticulos = state => state.lavendimia.data;
+export const getVentas = state => state.lavendimia.data;
 
 export default LavendimiaReducer;

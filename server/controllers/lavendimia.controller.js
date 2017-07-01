@@ -34,4 +34,33 @@ export function getArticulos(req, res) {
 });
 }
 
+export function getVentas(req, res) {
+  res.json({ ventas: [
+    {
+      clave: '0001',
+      clavecliente: '001',
+      nombre: 'Jesus Valdez',
+      total: '3000',
+      fecha: '30/06/2017',
+      status: 'Activa',
+    },
+    {
+      clave: '0002',
+      clavecliente: '002',
+      nombre: 'Jorge Campos',
+      total: '3500',
+      fecha: '29/05/2017',
+      status: 'Activa',
+    },
+    {
+      clave: '0003',
+      clavecliente: '003',
+      nombre: 'Manuel Valennzuela',
+      total: '2000',
+      fecha: '28/06/2017',
+      status: 'Activa',
+    }],
+});
+}
+
 export function addCliente(req, res) {}
