@@ -19,7 +19,7 @@ class ArticulosPage extends Component {
         <tr>
           <td>{articulo.clave}</td>
           <td>{articulo.descripcion}</td>
-          <td></td>
+          <td><Button bsStyle="info" bsSize="xsmall" ><Link to="/venta" className={styles.linkformat}>Editar</Link></Button></td>
         </tr>
       );
     });

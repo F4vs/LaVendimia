@@ -19,12 +19,15 @@ class ClientePage extends Component {
         <tr>
           <td>{cliente.clave}</td>
           <td>{cliente.nombre}</td>
+          <td><Button bsStyle="info" bsSize="xsmall" href="#">Editar</Button></td>
         </tr>
       );
     });
 
     return (
       <div>
+        <h2>Clientes Registrados</h2>
+        <br />
         <div className={styles.primaryButton}>
           <ButtonToolbar>
             <Button bsStyle="primary" bsSize="large"><Link to="/cliente" className={styles.linkformat}>Nuevo Cliente</Link></Button>

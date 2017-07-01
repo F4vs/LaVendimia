@@ -15,7 +15,7 @@ export function Header(props, context) {
   return (
     <Navbar>
       <div className={`pull-right ${styles.fecha}`}>
-        <p>{moment().format('MM-DD-YY')}</p>
+        <p>Fecha: {moment().format('MM-DD-YY')}</p>
       </div>
       <Nav>
         <NavDropdown eventKey={3} title="Inicio" id="basic-nav-dropdown">

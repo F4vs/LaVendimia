@@ -4,6 +4,8 @@ import styles from './Ventas.css';
 function Ventas(props, context) {
   return (
     <div>
+      <h2>Ventas Activas</h2>
+      <br />
       <div className={styles.primaryButton}>
         <ButtonToolbar>
           <Button bsStyle="primary" bsSize="large">Nueva Venta</Button>
@@ -27,7 +29,7 @@ function Ventas(props, context) {
             <td>Juan Perez</td>
             <td>1000</td>
             <td>30/06/2017</td>
-            <td>Vendido</td>
+            <td>Activa</td>
           </tr>
         </tbody>
       </Table>
