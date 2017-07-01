@@ -1,0 +1,13 @@
+.primaryButton {
+  margin-bottom: 20px;
+  margin-left: 80%;
+}
+
+.linkformat:hover {
+   text-decoration: none;
+   color: #FFFF;
+}
+
+.linkformat {
+   color: #FFF;
+}

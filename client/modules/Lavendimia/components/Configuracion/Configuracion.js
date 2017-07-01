@@ -6,6 +6,7 @@ function Configuracion(props, context) {
   return (
     <div>
       <h2>Configuracion General</h2>
+      <br />
       <Form horizontal>
         <FormGroup controlId="">
           <Col componentClass={ControlLabel} sm={3}>
@@ -31,13 +32,11 @@ function Configuracion(props, context) {
             <FormControl type="text" placeholder="" />
           </Col>
         </FormGroup>
-      </Form>
-      <div className={styles.buttonsToolbar}>
-        <ButtonToolbar>
+        <ButtonToolbar className={styles.buttonsToolbar}>
           <Button bsStyle="success">Cancelar</Button>
           <Button bsStyle="success" type="submit">Guardar</Button>
         </ButtonToolbar>
-      </div>
+      </Form>
     </div>
   );
 }
