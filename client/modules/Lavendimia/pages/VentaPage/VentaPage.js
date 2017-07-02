@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
-import { FormGroup, ControlLabel, FormControl, Form, Col, ButtonToolbar, Button, Table, Grid, Row } from 'react-bootstrap';
-import styles from './VentaPage.css';
+import { FormGroup, ControlLabel, FormControl, Form, Col, ButtonToolbar, Button, Table } from 'react-bootstrap';
+// import styles from './VentaPage.css';
 
 class VentaPage extends Component {
   render() {
@@ -19,7 +19,7 @@ class VentaPage extends Component {
           </FormGroup>
           <FormGroup controlId="">
             <Col componentClass={ControlLabel} sm={3}>
-                  Articulo
+              Articulo
             </Col>
             <Col sm={6}>
               <FormControl type="text" placeholder="" />
@@ -53,7 +53,6 @@ class VentaPage extends Component {
       </div>
     );
   }
-
 }
 
 VentaPage.propTypes = {

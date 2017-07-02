@@ -40,6 +40,14 @@ export default (
       }}
     />
     <Route
+      path="/articulo"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./modules/Lavendimia/pages/ArticuloPage/ArticuloPage.js').default);
+        });
+      }}
+    />
+    <Route
       path="/clientes"
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
@@ -51,7 +59,7 @@ export default (
       path="/cliente"
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
-          cb(null, require('./modules/Lavendimia/pages/Registroclientepage/Registroclientepage.js').default);
+          cb(null, require('./modules/Lavendimia/pages/ClientePage/ClientePage.js').default);
         });
       }}
     />

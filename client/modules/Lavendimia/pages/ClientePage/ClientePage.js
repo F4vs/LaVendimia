@@ -1,11 +1,11 @@
 import React, { PropTypes, Component } from 'react';
 import { FormGroup, ControlLabel, FormControl, Form, Col, ButtonToolbar, Button } from 'react-bootstrap';
-import styles from './Registroclientepage.css';
+import styles from './ClientePage.css';
 import { connect } from 'react-redux';
 import { getClientes } from '../../LavendimiaReducer';
 import { fetchClientes } from '../../LavendimiaActions';
 
-class Registroclientepage extends Component {
+class ClientePage extends Component {
 
   componentDidMount() {
     this.props.dispatch(fetchClientes());
@@ -65,9 +65,9 @@ function mapStateToProps(state) {
   };
 }
 
-Registroclientepage.propTypes = {
+ClientePage.propTypes = {
   clientes: PropTypes.array,
   dispatch: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(Registroclientepage);
+export default connect(mapStateToProps)(ClientePage);

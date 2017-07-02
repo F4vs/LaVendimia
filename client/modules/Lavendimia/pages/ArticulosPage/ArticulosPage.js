@@ -4,7 +4,6 @@ import styles from './ArticulosPage.css';
 import { connect } from 'react-redux';
 import { getArticulos } from '../../LavendimiaReducer';
 import { fetchArticulos } from '../../LavendimiaActions';
-import { Link } from 'react-router';
 
 class ArticulosPage extends Component {
 
@@ -19,7 +18,7 @@ class ArticulosPage extends Component {
         <tr>
           <td>{articulo.clave}</td>
           <td>{articulo.descripcion}</td>
-          <td><Button bsStyle="info" bsSize="xsmall" ><Link to="/venta" className={styles.linkformat}>Editar</Link></Button></td>
+          <td><Button bsStyle="info" bsSize="xsmall" href="#" className={styles.linkformat}>Editar</Button></td>
         </tr>
       );
     });
@@ -29,7 +28,7 @@ class ArticulosPage extends Component {
         <h2>Articulos Registrados</h2>
         <br />
         <ButtonToolbar className={styles.primaryButton}>
-          <Button bsStyle="primary" bsSize="large" ><Link to="/venta" className={styles.linkformat}>Nuevo Articulo</Link></Button>
+          <Button bsStyle="primary" bsSize="large" href="/articulo"className={styles.linkformat}>Nuevo Articulo</Button>
         </ButtonToolbar>
         <Table condensed hover>
           <thead>
