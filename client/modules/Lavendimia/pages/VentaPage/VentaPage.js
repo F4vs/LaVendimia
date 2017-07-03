@@ -5,7 +5,7 @@ import { getClientes } from '../../LavendimiaReducer';
 import { connect } from 'react-redux';
 import { fetchClientes } from '../../LavendimiaActions';
 
-const getSuggestionValue = suggestion => suggestion.name;
+const getSuggestionValue = suggestion => suggestion.nombre + ' ' + suggestion.primerapellido + ' ' + suggestion.segundoapellido;
 
 const renderSuggestion = cliente => (
   <div>
