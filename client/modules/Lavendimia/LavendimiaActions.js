@@ -29,10 +29,23 @@ export function addVentas(ventas) {
   };
 }
 
-export function addCliente(clientes) {
+export function addCliente(cliente) {
   return {
     type: ADD_CLIENTE,
-    clientes,
+    cliente,
+  };
+}
+
+export function addClienteRequest(cliente) {
+  return (dispatch) => {
+    return callApi('cliente', 'post', {
+      cliente: {
+        nombre: cliente.nombre,
+        primerapellido: cliente.primerapellido,
+        segundoapellido: cliente.segundoapellido,
+        rfc: cliente.rfc,
+      },
+    }).then(res => dispatch(addCliente(res.cliente)));
   };
 }
 
