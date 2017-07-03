@@ -1,4 +1,5 @@
 import Cliente from '../models/cliente';
+import Articulo from '../models/articulo';
 
 export function getClientes(req, res) {
   Cliente.find().sort('-dateAdded').exec((err, clientes) => {
@@ -6,6 +7,15 @@ export function getClientes(req, res) {
       res.status(500).send(err);
     }
     res.json({ clientes });
+  });
+}
+
+export function getArticulos(req, res) {
+  Articulo.find().sort('-dateAdded').exec((err, articulos) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+    res.json({ articulos });
   });
 }
 
@@ -34,21 +44,30 @@ export function addCliente(req, res) {
   });
 }
 
-export function getArticulos(req, res) {
-  res.json({ articulos: [
-    {
-      clave: '001',
-      descripcion: 'Mesa para 6 personas color cafe',
-    },
-    {
-      clave: '002',
-      descripcion: 'Silla de oficina color negro',
-    },
-    {
-      clave: '003',
-      descripcion: 'Cajorenera color madera',
-    }],
-});
+export function addArticulo(req, res) {
+  if (!req.body.articulo.descripcion || !req.body.articulo.modelo || !req.body.articulo.precio || !req.body.articulo.existencia) {
+    res.status(403).end();
+  } else {
+    Articulo.find().sort('-dateAdded').exec((errArticulo, articulos) => {
+      if (errArticulo) {
+        res.status(500).send(errArticulo);
+      } else {
+        let clave = 1;
+        if (articulos.length) {
+          const primero = articulos[0];
+          clave = primero.clave + 1;
+        }
+        const newArticulo = new Articulo(req.body.articulo);
+        newArticulo.clave = clave;
+        newArticulo.save((err, saved) => {
+          if (err) {
+            res.status(500).send(err);
+          }
+          res.json({ articulo: saved });
+        });
+      }
+    });
+  }
 }
 
 export function getVentas(req, res) {

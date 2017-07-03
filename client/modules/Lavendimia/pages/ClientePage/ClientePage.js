@@ -12,7 +12,6 @@ class ClientePage extends Component {
   }
 
   componentWillUpdate(nextProps, nextState) {
-    console.log(nextProps);
     if (nextProps.clienteSuccess) {
       window.location.href = '/clientes';
     }

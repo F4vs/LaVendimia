@@ -5,6 +5,7 @@ export const ADD_CLIENTES = 'LAVENDIMIA/ADD_CLIENTES';
 export const ADD_ARTICULOS = 'LAVENDIMIA/ADD_ARTICULOS';
 export const ADD_VENTAS = 'LAVENDIMIA/ADD_VENTAS';
 export const ADD_CLIENTE = 'LAVENDIMIA/ADD_CLIENTE';
+export const ADD_ARTICULO = 'LAVENDIMIA/ADD_ARTICULO';
 
 // Export Actions
 
@@ -36,6 +37,13 @@ export function addCliente(cliente) {
   };
 }
 
+export function addArticulo(articulo) {
+  return {
+    type: ADD_ARTICULO,
+    articulo,
+  };
+}
+
 export function addClienteRequest(cliente) {
   return (dispatch) => {
     return callApi('cliente', 'post', {
@@ -46,6 +54,19 @@ export function addClienteRequest(cliente) {
         rfc: cliente.rfc,
       },
     }).then(res => dispatch(addCliente(res.cliente)));
+  };
+}
+
+export function addArticuloRequest(articulo) {
+  return (dispatch) => {
+    return callApi('articulo', 'post', {
+      articulo: {
+        descripcion: articulo.descripcion,
+        modelo: articulo.modelo,
+        precio: articulo.precio,
+        existencia: articulo.existencia,
+      },
+    }).then(res => dispatch(addArticulo(res.articulo)));
   };
 }
 

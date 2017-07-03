@@ -1,9 +1,69 @@
 import React, { PropTypes, Component } from 'react';
 import { FormGroup, ControlLabel, FormControl, Form, Col, ButtonToolbar, Button, Table } from 'react-bootstrap';
-// import styles from './VentaPage.css';
+import Autosuggest from 'react-autosuggest';
+import { getClientes } from '../../LavendimiaReducer';
+import { connect } from 'react-redux';
+import { fetchClientes } from '../../LavendimiaActions';
+
+const getSuggestionValue = suggestion => suggestion.name;
+
+const renderSuggestion = cliente => (
+  <div>
+    {cliente.nombre} {cliente.primerapellido} {cliente.segundoapellido}
+  </div>
+);
 
 class VentaPage extends Component {
+  constructor() {
+    super();
+    this.state = {
+      value: '',
+      suggestions: []
+    }; }
+
+  componentDidMount() {
+    this.props.dispatch(fetchClientes());
+  }
+
+  onChange = (event, { newValue }) => {
+    this.setState({
+      value: newValue
+    });
+  };
+
+  onSuggestionsFetchRequested = ({ value }) => {
+    this.setState({
+      suggestions: this.getSuggestions(value)
+    });
+  };
+
+  onSuggestionsClearRequested = () => {
+    this.setState({
+      suggestions: []
+    });
+  };
+
+  getSuggestions = (value) => {
+    const data = this.props.clientes;
+    const inputValue = value.trim().toLowerCase();
+    const inputLength = inputValue.length;
+    return inputLength === 0 ? [] : data.filter(cliente =>
+      cliente.nombre.toLowerCase().slice(0, inputLength) === inputValue ||
+      cliente.primerapellido.toLowerCase().slice(0, inputLength) === inputValue ||
+      cliente.segundoapellido.toLowerCase().slice(0, inputLength) === inputValue
+    );
+  }
+
   render() {
+    const { value, suggestions } = this.state;
+
+    // Autosuggest will pass through all these props to the input.
+    const inputProps = {
+      placeholder: 'Nombre del cliente',
+      value,
+      onChange: this.onChange
+    };
+
     return (
       <div>
         <h2>Registros de Ventas</h2>
@@ -13,8 +73,15 @@ class VentaPage extends Component {
             <Col componentClass={ControlLabel} sm={3}>
               Cliente
             </Col>
-            <Col sm={6}>
-              <FormControl type="text" placeholder="" />
+            <Col sm={4}>
+              <Autosuggest
+                suggestions={suggestions}
+                onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+                onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+                getSuggestionValue={getSuggestionValue}
+                renderSuggestion={renderSuggestion}
+                inputProps={inputProps}
+              />
             </Col>
           </FormGroup>
           <FormGroup controlId="">
@@ -55,7 +122,15 @@ class VentaPage extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    clientes: getClientes(state),
+  };
+}
+
 VentaPage.propTypes = {
+  clientes: PropTypes.array,
+  dispatch: PropTypes.func.isRequired,
 };
 
-export default VentaPage;
+export default connect(mapStateToProps)(VentaPage);
