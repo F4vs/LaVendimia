@@ -4,7 +4,7 @@ function Home(props, context) {
   return (
     <div>
       <h1>
-        Este es el home.
+        La vendimia
       </h1>
     </div>
   );

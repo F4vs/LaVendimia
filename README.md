@@ -1,6 +1,11 @@
+#LA VENDIMIA
+
+Desarrollar un Sistema Web intuitivo que permita la venta de muebles a crédito, seleccionando un
+plazo, el cual realice una serie de cálculos para los abonos correspondientes de acuerdo a cada plazo.
+
 ![](http://res.cloudinary.com/hashnode/image/upload/w_200/v1466495663/static_imgs/mern/v2/mernio-logo.png)
 
-# mern-starter
+## mern-starter
 ![title](https://travis-ci.org/Hashnode/mern-starter.svg?branch=v2.0.0)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![Discuss on Hashnode](

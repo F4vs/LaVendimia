@@ -18,7 +18,7 @@ class VentaPage extends Component {
     super();
     this.state = {
       value: '',
-      suggestions: []
+      clientes: []
     }; }
 
   componentDidMount() {
@@ -33,13 +33,13 @@ class VentaPage extends Component {
 
   onSuggestionsFetchRequested = ({ value }) => {
     this.setState({
-      suggestions: this.getSuggestions(value)
+      clientes: this.getSuggestions(value)
     });
   };
 
   onSuggestionsClearRequested = () => {
     this.setState({
-      suggestions: []
+      clientes: []
     });
   };
 
@@ -55,7 +55,7 @@ class VentaPage extends Component {
   }
 
   render() {
-    const { value, suggestions } = this.state;
+    const { value, clientes } = this.state;
 
     // Autosuggest will pass through all these props to the input.
     const inputProps = {
@@ -67,7 +67,6 @@ class VentaPage extends Component {
     return (
       <div>
         <h2>Registros de Ventas</h2>
-        <p>Folio-</p>
         <Form horizontal>
           <FormGroup controlId="">
             <Col componentClass={ControlLabel} sm={3}>
@@ -75,7 +74,7 @@ class VentaPage extends Component {
             </Col>
             <Col sm={4}>
               <Autosuggest
-                suggestions={suggestions}
+                suggestions={clientes}
                 onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
                 onSuggestionsClearRequested={this.onSuggestionsClearRequested}
                 getSuggestionValue={getSuggestionValue}
