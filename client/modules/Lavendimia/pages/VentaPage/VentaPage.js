@@ -1,15 +1,22 @@
 import React, { PropTypes, Component } from 'react';
-import { FormGroup, ControlLabel, FormControl, Form, Col, ButtonToolbar, Button, Table } from 'react-bootstrap';
+import { FormGroup, ControlLabel, Form, Col, ButtonToolbar, Button, Table } from 'react-bootstrap';
 import Autosuggest from 'react-autosuggest';
-import { getClientes } from '../../LavendimiaReducer';
+import { getClientes, getArticulos } from '../../LavendimiaReducer';
 import { connect } from 'react-redux';
-import { fetchClientes } from '../../LavendimiaActions';
+import { fetchClientes, fetchArticulos } from '../../LavendimiaActions';
 
 const getSuggestionValue = suggestion => suggestion.nombre + ' ' + suggestion.primerapellido + ' ' + suggestion.segundoapellido;
+const getSuggestionValueArticulo = suggestion => suggestion.descripcion;
 
 const renderSuggestion = cliente => (
   <div>
     {cliente.nombre} {cliente.primerapellido} {cliente.segundoapellido}
+  </div>
+);
+
+const renderSuggestionArticulo = articulo => (
+  <div>
+    {articulo.descripcion}
   </div>
 );
 
@@ -18,28 +25,43 @@ class VentaPage extends Component {
     super();
     this.state = {
       value: '',
-      clientes: []
+      valueArticulo: '',
+      clientes: [],
+      articulos: [],
     }; }
 
   componentDidMount() {
     this.props.dispatch(fetchClientes());
+    this.props.dispatch(fetchArticulos());
   }
 
   onChange = (event, { newValue }) => {
     this.setState({
-      value: newValue
+      value: newValue,
     });
   };
 
   onSuggestionsFetchRequested = ({ value }) => {
     this.setState({
-      clientes: this.getSuggestions(value)
+      clientes: this.getSuggestions(value),
+    });
+  };
+
+  onSuggestionsFetchRequestedArticulo = ({ valueArticulo }) => {
+    this.setState({
+      articulos: this.getSuggestionsArticulo(valueArticulo),
     });
   };
 
   onSuggestionsClearRequested = () => {
     this.setState({
-      clientes: []
+      clientes: [],
+    });
+  };
+
+  onSuggestionsClearRequestedArticulo = () => {
+    this.setState({
+      articulos: [],
     });
   };
 
@@ -54,14 +76,29 @@ class VentaPage extends Component {
     );
   }
 
+  getSuggestionsArticulo = (valueArticulo) => {
+    const data = this.props.articulos;
+    const inputValue = valueArticulo.trim().toLowerCase();
+    const inputLength = inputValue.length;
+    return inputLength === 0 ? [] : data.filter(articulo =>
+      articulo.descripcion.toLowerCase().slice(0, inputLength) === inputValue
+    );
+  }
+
   render() {
-    const { value, clientes } = this.state;
+    const { value, clientes, valueArticulo, articulos } = this.state;
 
     // Autosuggest will pass through all these props to the input.
     const inputProps = {
       placeholder: 'Nombre del cliente',
       value,
-      onChange: this.onChange
+      onChange: this.onChange,
+    };
+
+    const inputArticuloProps = {
+      placeholder: 'Descripcion del articulo',
+      valueArticulo,
+      onChange: this.onChange,
     };
 
     return (
@@ -88,7 +125,14 @@ class VentaPage extends Component {
               Articulo
             </Col>
             <Col sm={6}>
-              <FormControl type="text" placeholder="" />
+              <Autosuggest
+                suggestions={articulos}
+                onSuggestionsFetchRequested={this.onSuggestionsFetchRequestedArticulo}
+                onSuggestionsClearRequested={this.onSuggestionsClearRequestedArticulo}
+                getSuggestionValue={getSuggestionValueArticulo}
+                renderSuggestion={renderSuggestionArticulo}
+                inputProps={inputArticuloProps}
+              />
             </Col>
           </FormGroup>
           <ButtonToolbar>
@@ -124,11 +168,13 @@ class VentaPage extends Component {
 function mapStateToProps(state) {
   return {
     clientes: getClientes(state),
+    articulos: getArticulos(state),
   };
 }
 
 VentaPage.propTypes = {
   clientes: PropTypes.array,
+  articulos: PropTypes.array,
   dispatch: PropTypes.func.isRequired,
 };
 
