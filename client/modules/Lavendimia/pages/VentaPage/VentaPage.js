@@ -25,7 +25,7 @@ class VentaPage extends Component {
     super();
     this.state = {
       value: '',
-      valueArticulo: '',
+      articuloValue: '',
       clientes: [],
       articulos: [],
     }; }
@@ -41,15 +41,21 @@ class VentaPage extends Component {
     });
   };
 
+  onChangeArticulo = (event, { newValue }) => {
+    this.setState({
+      articuloValue: newValue,
+    });
+  };
+
   onSuggestionsFetchRequested = ({ value }) => {
     this.setState({
       clientes: this.getSuggestions(value),
     });
   };
 
-  onSuggestionsFetchRequestedArticulo = ({ valueArticulo }) => {
+  onSuggestionsFetchRequestedArticulo = ({ value }) => {
     this.setState({
-      articulos: this.getSuggestionsArticulo(valueArticulo),
+      articulos: this.getSuggestionsArticulo(value),
     });
   };
 
@@ -66,9 +72,11 @@ class VentaPage extends Component {
   };
 
   getSuggestions = (value) => {
+
     const data = this.props.clientes;
     const inputValue = value.trim().toLowerCase();
     const inputLength = inputValue.length;
+    console.log(data);
     return inputLength === 0 ? [] : data.filter(cliente =>
       cliente.nombre.toLowerCase().slice(0, inputLength) === inputValue ||
       cliente.primerapellido.toLowerCase().slice(0, inputLength) === inputValue ||
@@ -76,9 +84,9 @@ class VentaPage extends Component {
     );
   }
 
-  getSuggestionsArticulo = (valueArticulo) => {
+  getSuggestionsArticulo = (articuloValue) => {
     const data = this.props.articulos;
-    const inputValue = valueArticulo.trim().toLowerCase();
+    const inputValue = articuloValue.trim().toLowerCase();
     const inputLength = inputValue.length;
     return inputLength === 0 ? [] : data.filter(articulo =>
       articulo.descripcion.toLowerCase().slice(0, inputLength) === inputValue
@@ -86,7 +94,7 @@ class VentaPage extends Component {
   }
 
   render() {
-    const { value, clientes, valueArticulo, articulos } = this.state;
+    const { value, clientes, articuloValue, articulos } = this.state;
 
     // Autosuggest will pass through all these props to the input.
     const inputProps = {
@@ -97,8 +105,8 @@ class VentaPage extends Component {
 
     const inputArticuloProps = {
       placeholder: 'Descripcion del articulo',
-      valueArticulo,
-      onChange: this.onChange,
+      value: articuloValue,
+      onChange: this.onChangeArticulo,
     };
 
     return (
