@@ -10,7 +10,9 @@ import {
 
 // Initial State
 const initialState = {
-  data: [],
+  dataVentas: [],
+  dataCliente: [],
+  dataArticulo: [],
   clienteSuccess: null,
   articuloSuccess: null,
 };
@@ -18,25 +20,25 @@ const initialState = {
 const LavendimiaReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_CLIENTES :
-      return {
-        data: action.clientes,
-      };
+      return Object.assign({}, state, {
+        dataCliente: action.clientes,
+      });
     case ADD_ARTICULOS :
-      return {
-        data: action.articulos,
-      };
+      return Object.assign({}, state, {
+        dataArticulo: action.articulos,
+      });
     case ADD_VENTAS :
-      return {
-        data: action.ventas,
-      };
+      return Object.assign({}, state, {
+        dataVentas: action.ventas,
+      });
     case ADD_CLIENTE :
-      return {
+      return Object.assign({}, state, {
         clienteSuccess: action.cliente,
-      };
+      });
     case ADD_ARTICULO :
-      return {
+      return Object.assign({}, state, {
         articuloSuccess: action.articulo,
-      };
+      });
     default:
       return state;
   }
@@ -44,8 +46,8 @@ const LavendimiaReducer = (state = initialState, action) => {
 
 export const getClienteSuccess = state => state.lavendimia.clienteSuccess;
 export const getArticuloSuccess = state => state.lavendimia.articuloSuccess;
-export const getClientes = state => state.lavendimia.data;
-export const getArticulos = state => state.lavendimia.data;
-export const getVentas = state => state.lavendimia.data;
+export const getClientes = state => state.lavendimia.dataCliente;
+export const getArticulos = state => state.lavendimia.dataArticulo;
+export const getVentas = state => state.lavendimia.dataVentas;
 
 export default LavendimiaReducer;

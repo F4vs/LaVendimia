@@ -4,8 +4,9 @@ import Autosuggest from 'react-autosuggest';
 import { getClientes, getArticulos } from '../../LavendimiaReducer';
 import { connect } from 'react-redux';
 import { fetchClientes, fetchArticulos } from '../../LavendimiaActions';
+import style from './VentaPage.css';
 
-const getSuggestionValue = suggestion => suggestion.nombre + ' ' + suggestion.primerapellido + ' ' + suggestion.segundoapellido;
+const getSuggestionValue = suggestion => suggestion.nombre + ' ' + suggestion.primerapellido + ' ' + suggestion.segundoapellido + ' - ' + suggestion.rfc;
 const getSuggestionValueArticulo = suggestion => suggestion.descripcion;
 
 const renderSuggestion = cliente => (
@@ -24,10 +25,13 @@ class VentaPage extends Component {
   constructor() {
     super();
     this.state = {
-      value: '',
+      clienteValue: '',
       articuloValue: '',
       clientes: [],
       articulos: [],
+      articuloVenta: [],
+      selectedArticulo: null,
+      selectedCliente: null,
     }; }
 
   componentDidMount() {
@@ -35,9 +39,9 @@ class VentaPage extends Component {
     this.props.dispatch(fetchArticulos());
   }
 
-  onChange = (event, { newValue }) => {
+  onChangeCliente = (event, { newValue }) => {
     this.setState({
-      value: newValue,
+      clienteValue: newValue,
     });
   };
 
@@ -71,12 +75,10 @@ class VentaPage extends Component {
     });
   };
 
-  getSuggestions = (value) => {
-
+  getSuggestions = (clienteValue) => {
     const data = this.props.clientes;
-    const inputValue = value.trim().toLowerCase();
+    const inputValue = clienteValue.trim().toLowerCase();
     const inputLength = inputValue.length;
-    console.log(data);
     return inputLength === 0 ? [] : data.filter(cliente =>
       cliente.nombre.toLowerCase().slice(0, inputLength) === inputValue ||
       cliente.primerapellido.toLowerCase().slice(0, inputLength) === inputValue ||
@@ -93,14 +95,37 @@ class VentaPage extends Component {
     );
   }
 
+  addVenta = () => {
+    console.log(this.state);
+    const { selectedArticulo, articuloVenta } = this.state;
+    articuloVenta.push(selectedArticulo);
+    this.setState({
+      articuloVenta,
+      selectedArticulo: null,
+    });
+  }
+
+  selectedCliente = (event, { suggestion }) => {
+    this.setState({
+      selectedCliente: suggestion
+    });
+  }
+
+  selectedArticulo = (event, { suggestion }) => {
+    this.setState({
+      selectedArticulo: suggestion
+    });
+  }
+
+
   render() {
-    const { value, clientes, articuloValue, articulos } = this.state;
+    const { clienteValue, clientes, articuloValue, articulos, articuloVenta } = this.state;
 
     // Autosuggest will pass through all these props to the input.
     const inputProps = {
       placeholder: 'Nombre del cliente',
-      value,
-      onChange: this.onChange,
+      value: clienteValue,
+      onChange: this.onChangeCliente,
     };
 
     const inputArticuloProps = {
@@ -109,6 +134,18 @@ class VentaPage extends Component {
       onChange: this.onChangeArticulo,
     };
 
+    const renglones = articuloVenta.map(articulo => {
+      return (
+        <tr>
+          <td>{articulo.descripcion}</td>
+          <td>{articulo.modelo}</td>
+          <td>{articulo.cantidad}</td>
+          <td>{articulo.precio}</td>
+          <td>{articulo.importe}</td>
+          <td><Button bsStyle="danger" bsSize="xsmall" href="#">Borrar</Button></td>
+        </tr>
+      );
+    });
     return (
       <div>
         <h2>Registros de Ventas</h2>
@@ -117,14 +154,16 @@ class VentaPage extends Component {
             <Col componentClass={ControlLabel} sm={3}>
               Cliente
             </Col>
-            <Col sm={4}>
+            <Col sm={6}>
               <Autosuggest
+                className={style.autoSuggest}
                 suggestions={clientes}
                 onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
                 onSuggestionsClearRequested={this.onSuggestionsClearRequested}
                 getSuggestionValue={getSuggestionValue}
                 renderSuggestion={renderSuggestion}
                 inputProps={inputProps}
+                onSuggestionSelected={this.selectedCliente}
               />
             </Col>
           </FormGroup>
@@ -140,11 +179,12 @@ class VentaPage extends Component {
                 getSuggestionValue={getSuggestionValueArticulo}
                 renderSuggestion={renderSuggestionArticulo}
                 inputProps={inputArticuloProps}
+                onSuggestionSelected={this.selectedArticulo}
               />
             </Col>
           </FormGroup>
           <ButtonToolbar>
-            <Button bsStyle="primary" type="submit">Agregar</Button>
+            <Button bsStyle="primary" onClick={this.addVenta} >Agregar</Button>
           </ButtonToolbar>
         </Form>
         <br />
@@ -159,13 +199,7 @@ class VentaPage extends Component {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>01</td>
-              <td>Comedor de roble para 6 perosonas</td>
-              <td>2</td>
-              <td>$5,000</td>
-              <td>$6,000</td>
-            </tr>
+           {renglones}
           </tbody>
         </Table>
       </div>

@@ -1,1 +1,7 @@
-
+.styleAutoSuggest {
+  border-width: 2px;
+  border-style: solid;
+  font-size:8pt;
+  color: #009900;
+  letter-spacing : 3px;
+}
